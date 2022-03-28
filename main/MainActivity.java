@@ -1,44 +1,38 @@
-package vn.edu.ntu.a61133341_bai19;
+package vn.edu.ntu.a61133341_bai18;
 
-import android.os.Bundle;
+iimport android.os.Bundle;
+import android.app.ListActivity;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+public class MainActivity extends ListActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    ListView lvProgram;
-
-    String[] programName = {"Hà nội","Huế","Spa","Côn sơn","Vũng tàu","Đà nẵng"};
-
-    int[] programImages = {R.drawable.e, R.drawable.s,R.drawable.s,R.drawable.e,R.drawable.e,R.drawable.e};
-
-
+    TextView selection;
+    String arr[]={"Intel","SamSung",
+            "Nokia","Simen","AMD",
+            "KIC","ECD"};
+    ArrayAdapter<String >adapter=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final TextView txt=(TextView) findViewById(R.id.txtv);
-        // Get the handle for ListView
-        lvProgram = findViewById(R.id.list);
-        // Specify an adapter and pass context along with all the arrays in constructor
-        ProgramAdapter programAdapter = new ProgramAdapter(this, programName, programImages);
-        lvProgram.setAdapter(programAdapter);
-        lvProgram.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
-                    public void onItemClick(AdapterView<?> arg0,
-                                            View arg1,
-                                            int arg2,
-                                            long arg3) {
-                        txt.setText(programName[arg2]);
-                    }
-                });
 
+        adapter=new ArrayAdapter<String>
+                (this,
+                        android.R.layout.simple_list_item_1,
+                        arr);
+
+        setListAdapter(adapter);
+
+        selection=(TextView) findViewById(R.id.selection);
+    }
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        // TODO Auto-generated method stub
+        super.onListItemClick(l, v, position, id);
+        String txt="postion = "+position +"; value ="+arr[position];
+        selection.setText(txt);
     }
 }
-© 2022 GitHub, Inc.
-        Terms
-        Priva
